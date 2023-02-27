@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <title>Pricing component</title>
+
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <main class="container text-center">
+        <h1>Our Pricing</h1>
+        <label for="pricing" class="pricing">
+        <span class="label">
+            Annually
+        </span>
+
+        <span class="switch">
+            <input type="checkbox" id="pricing" checked>
+            <span class="slider"></span>
+        </span>
+
+        <span class="label">
+            <span>Monthly</span>
+        </span>
+        </label>
+        <div class="card-group">
+            <div class="card">
+              <h2 class="card-title">Basic</h2>
+              <h3 class="card-price">
+                <small>&dollar;</small>
+                <span class="anually" hidden>199.99</span>
+                <span class="monthly">19.99</span>
+              </h3>
+              <ul class="card-list">
+                <li>500 GB Storage</li>
+                <li>2 Users Allowed</li>
+                <li>Send up to 3 GB</li>
+              </ul>
+              
+              <button class="btn">Learn More</button>
+            </div>
+
+            <div class="card card-primary">
+                <h2 class="card-title">Professional</h2>
+                <h3 class="card-price">
+                  <small>&dollar;</small>
+                  <span class="anually" hidden>249.99</span>
+                  <span class="monthly">24.99</span>
+                </h3>
+                <ul class="card-list">
+                  <li>1 TB Storage</li>
+                  <li>5 Users Allowed</li>
+                  <li>Send up to 10 GB</li>
+                </ul>
+                
+                <button class="btn btn-primary">Learn More</button>
+            </div>
+        
+            <div class="card">
+                <h2 class="card-title">Master</h2>
+                <h3 class="card-price">
+                  <small>&dollar;</small>
+                  <span class="anually" hidden>399.99</span>
+                  <span class="monthly">39.99</span>
+                </h3>
+                <ul class="card-list">
+                  <li>2 TB Storage</li>
+                  <li>10 Users Allowed</li>
+                  <li>Send up to 20 GB</li>
+                </ul>
+                
+                <button class="btn">Learn More</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        const toggle = document.getElementById('pricing');
+        const anually = document.querySelectorAll('.anually');
+        const monthly = document.querySelectorAll('.monthly');
+  
+        toggle.addEventListener('change', handleToggle);
+  
+        function handleToggle(e) {
+          if (e.target.checked) {
+            anually.forEach(element => element.setAttribute('hidden', true));
+            monthly.forEach(element => element.removeAttribute('hidden'));
+          } else {
+            anually.forEach(element => element.removeAttribute('hidden'));
+            monthly.forEach(element => element.setAttribute('hidden', true));
+          }
+        }
+    </script>
+  </body>
+</html>
