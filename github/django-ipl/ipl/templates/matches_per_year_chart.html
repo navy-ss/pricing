@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Problem 1</h1>
+    <div id="matches-per-year" class="mt-4"></div>
+    
+    {% include 'partials/_back_button.html' %}
+    <hr>
+    <div class="m-4">
+        <a href="{% url 'ipl:matches_per_year' %}" target="_blank">View API ↵</a>
+    </div>
+    <script>
+        // Fetch data from the API
+        fetch('/api/matches_per_year/')
+            .then(response => response.json())
+            .then(data => {
+                // Render the HighCharts chart
+                Highcharts.chart('matches-per-year', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Matches Per Year'
+                    },
+                    xAxis: {
+                        categories: data.map(item => item.season),
+                        title: {
+                            text: 'Year'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Matches'
+                        }
+                    },
+                    series: [{
+                        name: 'Matches',
+                        data: data.map(item => item.matches),
+                        color: 'grey'
+                    }]
+                });
+            });
+    </script>
+{% endblock %}

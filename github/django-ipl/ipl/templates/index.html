@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h1>Welcome to IPL Project</h1>
+        <p>IPL Data Analysis</p>
+        <a href="{% url 'ipl:index' %}" class="btn btn-dark">
+            ⇓ GO DOWN ⇓
+        </a>
+    </div>
+</div>
+
+<div class="row d-flex justify-content-between ">
+    <div class="card my-4 col-md-6">
+        <div class="card-body bg-dark text-light p-5">
+            <h4 class="card-title">Matches Played Per Year Chart</h4>
+            <p class="card-text">HighCharts for Number of matches played per year for all the years in IPL</p>
+            <a href="{% url 'ipl:matches_per_year_chart' %}" class="btn btn-primary">View Chart »</a>
+        </div>
+    </div>
+    <div class="card my-4 col-md-6">
+        <div class="card-body bg-dark text-light p-5">
+            <h4 class="card-title">Wins Per Team Per Year Chart</h4>
+            <p class="card-text">Highcharts for Number of matches won per team per year in IPL</p>
+            <a href="{% url 'ipl:wins_per_team_per_year_chart' %}" class="btn btn-primary">View Chart »</a>
+        </div>
+    </div>
+    <div class="card my-4 col-md-6">
+        <div class="card-body bg-dark text-light p-5">
+            <h4 class="card-title">Extra Runs Conceded In 2016 Chart</h4>
+            <p class="card-text">HighCharts for Extra runs conceded per team in the year 2016</p>
+            <a href="{% url 'ipl:extra_runs_conceded_2016_chart' %}" class="btn btn-primary">View Chart »</a>
+        </div>
+    </div>
+    <div class="card my-4 col-md-6">
+        <div class="card-body bg-dark text-light p-5">
+            <h4 class="card-title">Top Economical Bowlers In 2015 Chart</h4>
+            <p class="card-text">HighCharts for Top 10 economical bowlers in the year 2015</p>
+            <a href="{% url 'ipl:top_economical_bowlers_2015_chart' %}" class="btn btn-primary">View Chart »</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

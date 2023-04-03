@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Problem 2</h1>
+    <div id="wins-per-team-per-year" class="mt-4"></div>
+
+    {% include 'partials/_back_button.html' %}
+    <hr>
+    <div class="m-4">
+        <a href="{% url 'ipl:wins_per_team_per_year' %}" target="_blank">View API ↵</a>
+    </div>
+    <script>
+        // Fetch data from the API
+        fetch('/api/wins_per_team_per_year/')
+            .then(response => response.json())
+            .then(data => {
+                const categories = Object.keys(data);
+                // get unique teams
+                const teams = [...new Set(Object.values(data).flatMap(Object.keys))];
+                // create series for each team
+                const series = teams.map(team => {
+                    return {
+                        name: team,
+                        data: categories.map(year => data[year][team] || 0)
+                    };
+                });
+                
+                // Render the HighCharts chart for wins per team per year where data is a nested objects
+                Highcharts.chart('wins-per-team-per-year', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Wins Per Team Per Year'
+                    },
+                    xAxis: {
+                        categories: categories,
+                        title: {
+                            text: 'Year'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Wins'
+                        }
+                    },
+                    series: series
+                });
+            });
+    </script>
+{% endblock %}

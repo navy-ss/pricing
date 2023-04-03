@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Problem 3</h1>
+    <div id="extra-runs-conceded-2016" class="mt-4"></div>
+
+    {% include 'partials/_back_button.html' %}
+    <hr>
+    <div class="m-4">
+        <a href="{% url 'ipl:extra_runs_conceded_2016' %}" target="_blank">View API ↵</a>
+    </div>
+    <script>
+        // Fetch data from the API
+        fetch('/api/extra_runs_conceded_2016/')
+            .then(response => response.json())
+            .then(data => {
+                // Render the HighCharts chart for extra runs conceded by each team in 2016
+                Highcharts.chart('extra-runs-conceded-2016', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Extra Runs Conceded By Each Team In 2016'
+                    },
+                    xAxis: {
+                        categories: data.map(team => team.bowling_team),
+                        title: {
+                            text: 'Team'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Extra Runs Conceded'
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Extra Runs Conceded',
+                            data: data.map(team => team.extra_runs_conceded),
+                            color: 'grey',
+                        }]
+                });
+            });
+    </script>
+{% endblock %}

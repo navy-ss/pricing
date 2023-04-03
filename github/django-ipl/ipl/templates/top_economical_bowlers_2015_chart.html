@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <h1>Problem 4</h1>
+    <div id="top-economical-bowlers-2015" class="mt-4"></div>
+
+    {% include 'partials/_back_button.html' %}
+    <hr>
+    <div class="m-4">
+        <a href="{% url 'ipl:top_economical_bowlers_2015' %}" target="_blank">View API ↵</a>
+    </div>
+    <script>
+        // Fetch data from the API
+        fetch('/api/top_economical_bowlers_2015/')
+            .then(response => response.json())
+            .then(data => {
+                // Render the HighCharts chart for top economical bowlers in 2015
+                Highcharts.chart('top-economical-bowlers-2015', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Top Economical Bowlers In 2015'
+                    },
+                    xAxis: {
+                        categories: Object.keys(data),
+                        title: {
+                            text: 'Bowler'
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Economy'
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Economy',
+                            data: Object.values(data),
+                            color: 'grey',
+                        }]
+                });
+            });
+    </script>
+{% endblock %}
